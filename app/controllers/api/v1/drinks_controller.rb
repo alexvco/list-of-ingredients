@@ -1,4 +1,6 @@
 class Api::V1::DrinksController < ApiController
+  before_action :authenticate_with_token!, only: [:index]
+  
   def index
     @drinks = Drink.all
     render json: @drinks.to_json
