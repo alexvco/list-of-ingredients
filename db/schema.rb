@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_001008) do
+ActiveRecord::Schema.define(version: 2018_12_20_001901) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(version: 2018_12_20_001008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["drink_id"], name: "index_ingredients_on_drink_id"
+  end
+
+  create_table "jwt_blacklists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["jti"], name: "index_jwt_blacklists_on_jti"
   end
 
   add_foreign_key "ingredients", "drinks"
