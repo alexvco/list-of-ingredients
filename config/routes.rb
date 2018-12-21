@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
+  # devise_for :customers
   namespace 'api', defaults: {format: :json} do
     namespace 'v1' do
       resources :drinks
@@ -13,8 +13,8 @@ Rails.application.routes.draw do
                    #   registration: 'signup'
                    # },
                    controllers: {
-                     sessions: 'sessions',
-                     registrations: 'registrations'
+                     sessions: 'api/v1/sessions',
+                     registrations: 'api/v1/registrations'
                    }
     end
   end

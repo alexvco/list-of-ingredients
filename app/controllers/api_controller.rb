@@ -6,23 +6,9 @@ class ApiController < ActionController::API
     render json: {error: "Not found"}, status: 404
   end
 
-  def render_resource(resource)
-    if resource.errors.empty?
-      render json: resource
-    else
-      validation_error(resource)
-    end
-  end
-
-  def validation_error(resource)
-    render json: {
-      errors: [
-        {
-          status: '400',
-          title: 'Bad Request',
-          detail: resource.errors
-        }
-      ]
-    }, status: :bad_request
+# override request_http_token_authentication to not call to set the correct status and headers and then render JSON instead of text
+  def request_http_token_authentication(realm = "Application", message = nil)
+    self.headers["WWW-Authenticate"] = %(Token realm="#{realm.gsub(/"/, "")}")
+    render json: {error: "HTTP Token: Access denied."}, status: :unauthorized
   end
 end

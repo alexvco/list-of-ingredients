@@ -37,5 +37,7 @@ module ListOfIngredients
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+
+    config.filter_parameters += ["password", "registration.password"]
   end
 end
